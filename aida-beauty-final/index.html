@@ -6,23 +6,129 @@
   <title>Aida Beauty - Boutique Mode & Beauté</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body { margin: 0; font-family: 'Inter', sans-serif; background: #fff9f8; color: #333; }
-    header { background: #ffc5c5; padding: 20px; text-align: center; }
-    header h1 { margin: 0; font-size: 2rem; }
-    nav { text-align: center; margin: 10px 0; }
-    nav a { margin: 0 15px; text-decoration: none; color: #c0392b; font-weight: 600; }
-    section.hero { background: #ffeaea; padding: 40px 20px; text-align: center; }
-    .hero h2 { font-size: 1.8rem; margin-bottom: 10px; }
-    .hero p { font-size: 1rem; color: #555; }
-    form { padding: 20px; background: #ffeaea; border-radius: 10px; margin: 20px; }
-    form input, form textarea { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 5px; }
-    form button { background-color: #c0392b; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
-    footer { text-align: center; padding: 20px; background: #ffeaea; margin-top: 40px; }
-    .cart { position: fixed; top: 10px; right: 10px; background: #fff; border: 1px solid #ccc; padding: 10px; border-radius: 8px; box-shadow: 0 0 5px rgba(0,0,0,0.1); }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #fff9f8;
+      color: #333;
+    }
+    header {
+      background: #ffc5c5;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+    nav {
+      text-align: center;
+      margin: 10px 0;
+    }
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #c0392b;
+      font-weight: 600;
+    }
+    section.hero {
+      background: #ffeaea;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .hero h2 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+    .hero p {
+      font-size: 1rem;
+      color: #555;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+    .product {
+      background: #fff;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .product img {
+      max-width: 100%;
+      border-radius: 8px;
+    }
+    .product h3 {
+      margin: 10px 0 5px;
+    }
+    .product p {
+      color: #e74c3c;
+      font-weight: bold;
+    }
+    .product button {
+      margin-top: 10px;
+      padding: 8px 12px;
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    form {
+      padding: 20px;
+      background: #ffeaea;
+      border-radius: 10px;
+      margin: 20px;
+    }
+    form input, form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    form button {
+      background-color: #c0392b;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .cart {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #ffeaea;
+      margin-top: 40px;
+    }
+    .category {
+      padding: 20px;
+    }
+    .category h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
   </style>
 </head>
 <body>
-  <header><h1>Aida Beauty</h1><p>Mode & Beauté moderne inspirée d'Afrique</p></header>
+  <header>
+    <h1>Aida Beauty</h1>
+    <p>Mode & Beauté moderne inspirée d'Afrique</p>
+  </header>
+
   <nav>
     <a href="#">Accueil</a>
     <a href="#femmes">Femme</a>
@@ -32,11 +138,46 @@
     <a href="#contact">Contact</a>
     <a href="#a-propos">A propos</a>
   </nav>
-  <div class="cart"><strong>Panier :</strong> <span id="cart-count">0</span> article(s)</div>
+
+  <div class="cart" id="cart">
+    <strong>Panier :</strong> <span id="cart-count">0</span> article(s)
+  </div>
+
   <section class="hero">
     <h2>Découvrez notre sélection tendance</h2>
     <p>Produits naturels, tenues modernes, style 100% vous</p>
   </section>
+
+  <section id="femmes" class="category">
+    <h2>Produits Femme</h2>
+    <div class="products">
+      <div class="product">
+        <img src="https://via.placeholder.com/200x200.png?text=Voile" alt="Voile Femme">
+        <h3>Voile</h3>
+        <p>1 500 FCFA</p>
+        <button onclick="addToCart('Voile')">Ajouter au panier</button>
+      </div>
+      <div class="product">
+        <img src="https://via.placeholder.com/200x200.png?text=Robe" alt="Robe Moderne">
+        <h3>Robe Moderne</h3>
+        <p>7 000 FCFA</p>
+        <button onclick="addToCart('Robe Moderne')">Ajouter au panier</button>
+      </div>
+      <div class="product">
+        <img src="https://via.placeholder.com/200x200.png?text=Foulard" alt="Foulard Femme">
+        <h3>Foulard</h3>
+        <p>1 000 FCFA</p>
+        <button onclick="addToCart('Foulard')">Ajouter au panier</button>
+      </div>
+      <div class="product">
+        <img src="https://via.placeholder.com/200x200.png?text=Boucles+d%27oreilles" alt="Boucles d'oreilles">
+        <h3>Boucles d'oreilles</h3>
+        <p>2 500 FCFA</p>
+        <button onclick="addToCart('Boucles d\'oreilles')">Ajouter au panier</button>
+      </div>
+    </div>
+  </section>
+
   <section id="commande">
     <h2 style="text-align:center;">Passer une commande</h2>
     <form action="https://formsubmit.co/ndeyeaidag600@gmail.com" method="POST">
@@ -49,21 +190,27 @@
       <button type="submit">Envoyer la commande</button>
     </form>
   </section>
+
   <section id="a-propos" style="padding: 20px;">
     <h2>A propos de Aida Beauty</h2>
-    <p>Aida Beauty est une marque qui met en valeur la beauté et l'élégance naturelle des femmes et des hommes africains.</p>
+    <p>Aida Beauty est une marque qui met en valeur la beauté et l'élégance naturelle des femmes et des hommes africains. Nos produits sont soigneusement choisis pour allier qualité, modernité et identité.</p>
   </section>
+
   <section id="contact" style="padding: 20px;">
     <h2>Contact</h2>
     <p>Email : ndeyeaidag600@gmail.com</p>
     <p>WhatsApp : +221 77 000 00 00</p>
   </section>
-  <footer><p>&copy; 2025 Aida Beauty - Tous droits réservés</p></footer>
+
+  <footer>
+    <p>&copy; 2025 Aida Beauty - Tous droits réservés</p>
+  </footer>
+
   <script>
     let cartCount = 0;
     function addToCart(item) {
       cartCount++;
-      document.querySelector('.cart span').textContent = cartCount;
+      document.getElementById('cart-count').textContent = cartCount;
       alert(item + ' ajouté au panier !');
     }
   </script>
