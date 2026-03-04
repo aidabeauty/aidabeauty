@@ -1,0 +1,22 @@
+{
+  "products": [
+    {
+      "name": "Voile moderne",
+      "price": 1500,
+      "category": "femme",
+      "image": "https://via.placeholder.com/600x400?text=Voile+Moderne"
+    },
+    {
+      "name": "Jean homme",
+      "price": 5000,
+      "category": "homme",
+      "image": "https://via.placeholder.com/600x400?text=Jean+Homme"
+    },
+    {
+      "name": "Crème visage",
+      "price": 3500,
+      "category": "beaute",
+      "image": "https://via.placeholder.com/600x400?text=Creme+Visage"
+    }
+  ]
+}
