@@ -1,367 +1,265 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Aida Beauty - Boutique</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --brand:#ff8fab; --brand2:#ffeaea; --text:#222; --muted:#666;
-      --danger:#c0392b; --wa:#25D366; --card:#fff; --shadow:0 10px 25px rgba(0,0,0,.08);
-      --radius:14px;
-    }
-    *{box-sizing:border-box}
-    body{margin:0; font-family:Inter,system-ui,Arial; background:#fff9f8; color:var(--text)}
-    header{background:var(--brand); color:#fff; padding:22px 14px; text-align:center}
-    header h1{margin:0; font-size:28px}
-    header p{margin:6px 0 0; opacity:.95}
+<meta charset="UTF-8">
+<title>Aida Beauty</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    nav{position:sticky; top:0; z-index:10; background:var(--brand2); padding:10px;
-        display:flex; gap:10px; justify-content:center; flex-wrap:wrap; border-bottom:1px solid #ffd6d6}
-    nav a{ text-decoration:none; color:var(--danger); font-weight:700; background:#fff; border:1px solid var(--danger);
-          padding:8px 12px; border-radius:999px}
-    nav a:hover{background:#fcdede}
+<style>
 
-    .wrap{max-width:1100px; margin:0 auto; padding:18px}
-    .hero{background:#fff0f0; border:1px solid #ffd6d6; border-radius:var(--radius); padding:16px; text-align:center}
-    .hero h2{margin:0 0 6px}
-    .hero p{margin:0; color:var(--muted)}
+body{
+font-family:Arial;
+margin:0;
+background:#fff9f8;
+}
 
-    .row{display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap; margin-top:14px}
-    .pill{background:#fff; border:1px solid #eee; box-shadow:0 4px 12px rgba(0,0,0,.04);
-          padding:10px 12px; border-radius:999px; font-weight:700}
-    .btn{border:none; cursor:pointer; font-weight:800; border-radius:12px; padding:10px 12px}
-    .btn-primary{background:var(--danger); color:#fff}
-    .btn-ghost{background:#fff; border:1px solid #ddd}
-    .btn-wa{background:var(--wa); color:#fff; text-decoration:none; display:inline-block; text-align:center}
-    .btn-danger{background:#b02a1b; color:#fff}
+header{
+background:#ff8fab;
+color:white;
+padding:20px;
+text-align:center;
+}
 
-    .sectionTitle{margin:22px 0 10px; font-size:20px; color:var(--danger)}
-    .grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:16px}
-    .card{background:var(--card); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); border:1px solid #f2f2f2}
-    .img{width:100%; height:190px; object-fit:cover; background:#f6f6f6; display:block}
-    .p{padding:12px}
-    .title{margin:0 0 6px; font-weight:800}
-    .price{margin:0 0 10px; color:#e74c3c; font-weight:900}
-    .meta{margin:0 0 12px; color:var(--muted); font-size:13px}
+nav{
+background:#ffeaea;
+padding:10px;
+text-align:center;
+}
 
-    .modalBack{position:fixed; inset:0; background:rgba(0,0,0,.45); display:none; align-items:center; justify-content:center; padding:16px}
-    .modal{width:min(520px, 100%); background:#fff; border-radius:18px; box-shadow:0 30px 80px rgba(0,0,0,.25); overflow:hidden}
-    .modalHead{background:var(--brand2); padding:14px 16px; display:flex; justify-content:space-between; align-items:center}
-    .modalHead strong{color:var(--danger)}
-    .modalBody{padding:16px}
-    .field{display:flex; flex-direction:column; gap:6px; margin-bottom:12px}
-    input, select{padding:11px 12px; border-radius:12px; border:1px solid #ddd; font-size:14px}
-    .small{font-size:12px; color:var(--muted)}
-    .prodLine{display:flex; gap:10px; align-items:center; justify-content:space-between; padding:10px; border:1px solid #eee; border-radius:12px; margin-top:10px; background:#fff}
-    .prodLine .left{display:flex; gap:10px; align-items:center}
-    .thumb{width:44px; height:44px; border-radius:10px; object-fit:cover; background:#f3f3f3}
-    footer{margin-top:28px; text-align:center; padding:18px; background:var(--brand2); color:#444}
-  </style>
+nav button{
+padding:10px;
+margin:5px;
+border:none;
+background:#c0392b;
+color:white;
+cursor:pointer;
+}
+
+.products{
+display:flex;
+flex-wrap:wrap;
+gap:20px;
+padding:20px;
+justify-content:center;
+}
+
+.card{
+background:white;
+width:200px;
+padding:10px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+text-align:center;
+}
+
+.card img{
+width:100%;
+border-radius:10px;
+}
+
+button{
+padding:8px;
+border:none;
+background:#25D366;
+color:white;
+cursor:pointer;
+margin-top:5px;
+}
+
+#adminPanel{
+display:none;
+background:white;
+padding:20px;
+position:fixed;
+top:10%;
+left:50%;
+transform:translateX(-50%);
+width:300px;
+box-shadow:0 0 20px rgba(0,0,0,0.2);
+}
+
+</style>
 </head>
+
 <body>
-  <header>
-    <h1>Aida Beauty</h1>
-    <p>Mode & Beauté moderne inspirée d'Afrique</p>
-  </header>
 
-  <nav>
-    <a href="#accueil">Accueil</a>
-    <a href="#femme">Femme</a>
-    <a href="#homme">Homme</a>
-    <a href="#beaute">Beauté</a>
-    <a href="#contact">Contact</a>
-    <a href="#admin" id="openAdmin">Admin</a>
-  </nav>
+<header>
+<h1>Aida Beauty</h1>
+<p>Mode & Beauté moderne inspirée d'Afrique</p>
+</header>
 
-  <div class="wrap" id="accueil">
-    <div class="hero">
-      <h2>Découvrez notre sélection tendance</h2>
-      <p>Produits naturels, tenues modernes, style 100% vous</p>
-    </div>
+<nav>
+<button onclick="showCategory('femme')">Femme</button>
+<button onclick="showCategory('homme')">Homme</button>
+<button onclick="showCategory('beaute')">Beauté</button>
+<button onclick="openAdmin()">Admin</button>
+</nav>
 
-    <div class="row">
-      <div class="pill">WhatsApp commandes : <span id="waShow">+221 77 000 00 00</span></div>
-      <button class="btn btn-ghost" id="resetBtn" title="Si tu veux vider tous les produits">Vider produits</button>
-    </div>
+<div class="products" id="products"></div>
 
-    <h3 class="sectionTitle" id="femme">Femme</h3>
-    <div class="grid" id="grid-femme"></div>
+<!-- ADMIN -->
 
-    <h3 class="sectionTitle" id="homme">Homme</h3>
-    <div class="grid" id="grid-homme"></div>
+<div id="adminPanel">
 
-    <h3 class="sectionTitle" id="beaute">Beauté</h3>
-    <div class="grid" id="grid-beaute"></div>
+<h3>Admin</h3>
 
-    <h3 class="sectionTitle" id="contact">Contact</h3>
-    <p>Email : <strong>ndeyeaidag600@gmail.com</strong></p>
-    <p>WhatsApp : <strong id="waText">+221 77 000 00 00</strong></p>
-  </div>
+<input id="password" type="password" placeholder="mot de passe">
 
-  <footer>© 2025 Aida Beauty - Tous droits réservés</footer>
+<button onclick="login()">Entrer</button>
 
-  <!-- MODAL ADMIN -->
-  <div class="modalBack" id="adminBack" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true">
-      <div class="modalHead">
-        <strong>Administration</strong>
-        <button class="btn btn-ghost" id="closeAdmin">Fermer</button>
-      </div>
-      <div class="modalBody" id="adminBody">
+<div id="adminArea" style="display:none">
 
-        <!-- LOGIN -->
-        <div id="loginBox">
-          <div class="field">
-            <label><strong>Mot de passe</strong></label>
-            <input type="password" id="adminPass" placeholder="Mot de passe admin">
-            <div class="small">Mot de passe actuel : <strong>aidasecret</strong> (tu peux le changer dans le code)</div>
-          </div>
-          <button class="btn btn-primary" id="loginBtn">Se connecter</button>
-        </div>
+<h4>Ajouter produit</h4>
 
-        <!-- ADMIN PANEL -->
-        <div id="panelBox" style="display:none;">
-          <div class="field">
-            <label><strong>Numéro WhatsApp (format international sans +)</strong></label>
-            <input id="waNumber" placeholder="ex: 22177XXXXXXX">
-            <div class="small">C’est ce numéro qui reçoit les commandes.</div>
-          </div>
+<input id="name" placeholder="Nom"><br><br>
 
-          <hr style="border:none;border-top:1px solid #eee; margin:14px 0">
+<input id="price" placeholder="Prix"><br><br>
 
-          <h4 style="margin:0 0 10px;color:#c0392b;">Ajouter un produit</h4>
-          <div class="field">
-            <label>Nom</label>
-            <input id="pName" placeholder="Ex: Voile moderne">
-          </div>
-          <div class="field">
-            <label>Prix (FCFA)</label>
-            <input id="pPrice" type="number" placeholder="Ex: 1500">
-          </div>
-          <div class="field">
-            <label>Catégorie</label>
-            <select id="pCat">
-              <option value="femme">Femme</option>
-              <option value="homme">Homme</option>
-              <option value="beaute">Beauté</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Image (depuis ton appareil)</label>
-            <input id="pImg" type="file" accept="image/*">
-            <div class="small">Conseil : photo pas trop lourde (≤ 1–2 Mo) pour éviter des bugs.</div>
-          </div>
+<select id="category">
+<option value="femme">Femme</option>
+<option value="homme">Homme</option>
+<option value="beaute">Beauté</option>
+</select><br><br>
 
-          <button class="btn btn-primary" id="addBtn">Ajouter le produit</button>
+<input type="file" id="image"><br><br>
 
-          <hr style="border:none;border-top:1px solid #eee; margin:16px 0">
+<button onclick="addProduct()">Ajouter</button>
 
-          <h4 style="margin:0 0 10px;color:#c0392b;">Produits enregistrés</h4>
-          <div id="listAdmin"></div>
-        </div>
+</div>
 
-      </div>
-    </div>
-  </div>
+</div>
 
-  <script>
-    // ====== CONFIG ======
-    const ADMIN_PASSWORD = "aidasecret"; // 🔐 change si tu veux
-    // IMPORTANT: WhatsApp number WITHOUT +
-    const DEFAULT_WA = "221770000000"; // change ici si tu veux
+<script>
 
-    // ====== STORAGE KEYS ======
-    const K_PRODUCTS = "aida_products_v1";
-    const K_WA = "aida_whatsapp_v1";
+let products = JSON.parse(localStorage.getItem("products")) || [];
 
-    // ====== HELPERS ======
-    const $ = (id)=>document.getElementById(id);
+let category="femme";
 
-    function getWA(){
-      return localStorage.getItem(K_WA) || DEFAULT_WA;
-    }
-    function setWA(v){
-      localStorage.setItem(K_WA, v);
-      refreshWA();
-    }
-    function waLink(message){
-      const num = getWA();
-      return `https://wa.me/${num}?text=${encodeURIComponent(message)}`;
-    }
+function save(){
 
-    function loadProducts(){
-      try { return JSON.parse(localStorage.getItem(K_PRODUCTS)) || []; }
-      catch { return []; }
-    }
-    function saveProducts(arr){
-      localStorage.setItem(K_PRODUCTS, JSON.stringify(arr));
-    }
+localStorage.setItem("products",JSON.stringify(products));
 
-    function formatPhone(){
-      const num = getWA();
-      // affichage joli
-      if(num.startsWith("221")) return "+221 " + num.slice(3,5) + " " + num.slice(5,8) + " " + num.slice(8);
-      return "+"+num;
-    }
-    function refreshWA(){
-      $("waShow").textContent = formatPhone();
-      $("waText").textContent = formatPhone();
-    }
+render();
 
-    // ====== RENDER SHOP ======
-    function cardHTML(p){
-      const msg = `Bonjour Aida Beauty, je veux commander : ${p.name} - ${p.price} FCFA (Catégorie: ${p.category}). Merci !`;
-      return `
-        <div class="card">
-          <img class="img" src="${p.image}" alt="${p.name}" onerror="this.style.display='none'">
-          <div class="p">
-            <p class="title">${p.name}</p>
-            <p class="price">${p.price} FCFA</p>
-            <p class="meta">${p.category}</p>
-            <a class="btn btn-wa" target="_blank" href="${waLink(msg)}">Commander sur WhatsApp</a>
-          </div>
-        </div>
-      `;
-    }
+}
 
-    function renderShop(){
-      const products = loadProducts();
-      const byCat = { femme:[], homme:[], beaute:[] };
-      products.forEach(p=>{
-        const c = (p.category||"").toLowerCase().trim();
-        if(byCat[c]) byCat[c].push(p);
-      });
+function render(){
 
-      $("grid-femme").innerHTML  = byCat.femme.length  ? byCat.femme.map(cardHTML).join("")  : "<p>Aucun produit pour le moment.</p>";
-      $("grid-homme").innerHTML  = byCat.homme.length  ? byCat.homme.map(cardHTML).join("")  : "<p>Aucun produit pour le moment.</p>";
-      $("grid-beaute").innerHTML = byCat.beaute.length ? byCat.beaute.map(cardHTML).join("") : "<p>Aucun produit pour le moment.</p>";
+let container=document.getElementById("products");
 
-      renderAdminList();
-    }
+container.innerHTML="";
 
-    // ====== ADMIN MODAL ======
-    function openAdmin(){
-      $("adminBack").style.display="flex";
-      $("adminBack").setAttribute("aria-hidden","false");
-      $("adminPass").value="";
-      $("loginBox").style.display="block";
-      $("panelBox").style.display="none";
-      $("waNumber").value = getWA();
-    }
-    function closeAdmin(){
-      $("adminBack").style.display="none";
-      $("adminBack").setAttribute("aria-hidden","true");
-    }
+products.filter(p=>p.category==category).forEach((p,i)=>{
 
-    function renderAdminList(){
-      const products = loadProducts();
-      const box = $("listAdmin");
-      if(!box) return;
-      if(products.length===0){
-        box.innerHTML = "<p class='small'>Aucun produit enregistré.</p>";
-        return;
-      }
-      box.innerHTML = products.map((p, idx)=>`
-        <div class="prodLine">
-          <div class="left">
-            <img class="thumb" src="${p.image}" alt="">
-            <div>
-              <div style="font-weight:800">${p.name}</div>
-              <div class="small">${p.price} FCFA • ${p.category}</div>
-            </div>
-          </div>
-          <button class="btn btn-danger" onclick="deleteProduct(${idx})">Supprimer</button>
-        </div>
-      `).join("");
-    }
+let card=document.createElement("div");
 
-    window.deleteProduct = function(i){
-      const arr = loadProducts();
-      arr.splice(i,1);
-      saveProducts(arr);
-      renderShop();
-    }
+card.className="card";
 
-    // ====== ADD PRODUCT ======
-    function fileToDataURL(file){
-      return new Promise((resolve,reject)=>{
-        const r = new FileReader();
-        r.onload = ()=>resolve(r.result);
-        r.onerror = reject;
-        r.readAsDataURL(file);
-      });
-    }
+card.innerHTML=`
 
-    async function addProduct(){
-      const name = $("pName").value.trim();
-      const price = Number($("pPrice").value);
-      const category = $("pCat").value;
-      const file = $("pImg").files[0];
+<img src="${p.image}">
 
-      if(!name || !price || !category){
-        alert("Remplis nom, prix, catégorie.");
-        return;
-      }
-      if(!file){
-        alert("Ajoute une image depuis ton appareil.");
-        return;
-      }
+<h4>${p.name}</h4>
 
-      // ⚠️ base64 peut devenir lourd si l'image est trop grande
-      const image = await fileToDataURL(file);
+<p>${p.price} FCFA</p>
 
-      const arr = loadProducts();
-      arr.push({ name, price, category, image });
-      saveProducts(arr);
+<button onclick="order('${p.name}',${p.price})">Commander</button>
 
-      $("pName").value="";
-      $("pPrice").value="";
-      $("pImg").value="";
-      $("pCat").value="femme";
+<button onclick="removeProduct(${i})" style="background:red">Supprimer</button>
 
-      renderShop();
-      alert("Produit ajouté ✅");
-    }
+`;
 
-    // ====== EVENTS ======
-    $("openAdmin").addEventListener("click",(e)=>{ e.preventDefault(); openAdmin(); });
-    $("closeAdmin").addEventListener("click", closeAdmin);
-    $("adminBack").addEventListener("click",(e)=>{ if(e.target.id==="adminBack") closeAdmin(); });
+container.appendChild(card);
 
-    $("loginBtn").addEventListener("click", ()=>{
-      const pass = $("adminPass").value;
-      if(pass === ADMIN_PASSWORD){
-        $("loginBox").style.display="none";
-        $("panelBox").style.display="block";
-        $("waNumber").value = getWA();
-        renderAdminList();
-      } else {
-        alert("Mot de passe incorrect.");
-      }
-    });
+});
 
-    $("addBtn").addEventListener("click", ()=>{ addProduct().catch(()=>alert("Erreur image. Essaie une image plus petite.")); });
+}
 
-    $("waNumber").addEventListener("change", ()=>{
-      const v = $("waNumber").value.trim();
-      if(!v || v.length < 8){ alert("Numéro invalide"); $("waNumber").value=getWA(); return; }
-      setWA(v);
-      renderShop();
-      alert("Numéro WhatsApp enregistré ✅");
-    });
+function showCategory(cat){
 
-    $("resetBtn").addEventListener("click", ()=>{
-      if(confirm("Vider tous les produits ?")){
-        localStorage.removeItem(K_PRODUCTS);
-        renderShop();
-      }
-    });
+category=cat;
 
-    // ====== INIT ======
-    refreshWA();
-    renderShop();
-  </script>
+render();
+
+}
+
+function order(name,price){
+
+let phone="221770000000";
+
+let text=`Bonjour je veux commander ${name} - ${price} FCFA`;
+
+window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`);
+
+}
+
+function removeProduct(i){
+
+products.splice(i,1);
+
+save();
+
+}
+
+function openAdmin(){
+
+document.getElementById("adminPanel").style.display="block";
+
+}
+
+function login(){
+
+if(document.getElementById("password").value=="aidasecret"){
+
+document.getElementById("adminArea").style.display="block";
+
+}
+
+else{
+
+alert("Mot de passe incorrect");
+
+}
+
+}
+
+function addProduct(){
+
+let name=document.getElementById("name").value;
+
+let price=document.getElementById("price").value;
+
+let category=document.getElementById("category").value;
+
+let file=document.getElementById("image").files[0];
+
+let reader=new FileReader();
+
+reader.onload=function(e){
+
+products.push({
+
+name,
+
+price,
+
+category,
+
+image:e.target.result
+
+});
+
+save();
+
+};
+
+reader.readAsDataURL(file);
+
+}
+
+render();
+
+</script>
+
 </body>
 </html>
