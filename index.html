@@ -1,265 +1,115 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<title>Aida Beauty</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<style>
-
-body{
-font-family:Arial;
-margin:0;
-background:#fff9f8;
-}
-
-header{
-background:#ff8fab;
-color:white;
-padding:20px;
-text-align:center;
-}
-
-nav{
-background:#ffeaea;
-padding:10px;
-text-align:center;
-}
-
-nav button{
-padding:10px;
-margin:5px;
-border:none;
-background:#c0392b;
-color:white;
-cursor:pointer;
-}
-
-.products{
-display:flex;
-flex-wrap:wrap;
-gap:20px;
-padding:20px;
-justify-content:center;
-}
-
-.card{
-background:white;
-width:200px;
-padding:10px;
-border-radius:10px;
-box-shadow:0 0 10px rgba(0,0,0,0.1);
-text-align:center;
-}
-
-.card img{
-width:100%;
-border-radius:10px;
-}
-
-button{
-padding:8px;
-border:none;
-background:#25D366;
-color:white;
-cursor:pointer;
-margin-top:5px;
-}
-
-#adminPanel{
-display:none;
-background:white;
-padding:20px;
-position:fixed;
-top:10%;
-left:50%;
-transform:translateX(-50%);
-width:300px;
-box-shadow:0 0 20px rgba(0,0,0,0.2);
-}
-
-</style>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aida Beauty - Boutique</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body{margin:0;font-family:Inter,Arial;background:#fff9f8;color:#222}
+    header{background:#ff8fab;color:#fff;padding:22px 14px;text-align:center}
+    header h1{margin:0;font-size:28px}
+    header p{margin:6px 0 0;opacity:.95}
+    nav{background:#ffeaea;padding:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;border-bottom:1px solid #ffd6d6;position:sticky;top:0}
+    nav a{text-decoration:none;color:#c0392b;font-weight:700;background:#fff;border:1px solid #c0392b;padding:8px 12px;border-radius:999px}
+    nav a:hover{background:#fcdede}
+    .wrap{max-width:1100px;margin:0 auto;padding:18px}
+    .hero{background:#fff0f0;border:1px solid #ffd6d6;border-radius:14px;padding:16px;text-align:center}
+    .hero h2{margin:0 0 6px}
+    .hero p{margin:0;color:#555}
+    .sectionTitle{margin:22px 0 10px;font-size:20px;color:#c0392b}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+    .card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 10px 25px rgba(0,0,0,.08);border:1px solid #f2f2f2}
+    .img{width:100%;height:190px;object-fit:cover;background:#f6f6f6;display:block}
+    .p{padding:12px}
+    .title{margin:0 0 6px;font-weight:800}
+    .price{margin:0 0 10px;color:#e74c3c;font-weight:900}
+    .meta{margin:0 0 12px;color:#666;font-size:13px}
+    .btn{display:inline-block;width:100%;text-align:center;text-decoration:none;padding:10px 12px;border-radius:12px;font-weight:900}
+    .btn-wa{background:#25D366;color:#fff}
+    footer{margin-top:28px;text-align:center;padding:18px;background:#ffeaea;color:#444}
+    .note{font-size:13px;color:#666;text-align:center;margin-top:10px}
+  </style>
 </head>
-
 <body>
-
-<header>
-<h1>Aida Beauty</h1>
-<p>Mode & Beauté moderne inspirée d'Afrique</p>
-</header>
-
-<nav>
-<button onclick="showCategory('femme')">Femme</button>
-<button onclick="showCategory('homme')">Homme</button>
-<button onclick="showCategory('beaute')">Beauté</button>
-<button onclick="openAdmin()">Admin</button>
-</nav>
-
-<div class="products" id="products"></div>
-
-<!-- ADMIN -->
-
-<div id="adminPanel">
-
-<h3>Admin</h3>
-
-<input id="password" type="password" placeholder="mot de passe">
-
-<button onclick="login()">Entrer</button>
-
-<div id="adminArea" style="display:none">
-
-<h4>Ajouter produit</h4>
-
-<input id="name" placeholder="Nom"><br><br>
-
-<input id="price" placeholder="Prix"><br><br>
-
-<select id="category">
-<option value="femme">Femme</option>
-<option value="homme">Homme</option>
-<option value="beaute">Beauté</option>
-</select><br><br>
-
-<input type="file" id="image"><br><br>
-
-<button onclick="addProduct()">Ajouter</button>
-
-</div>
-
-</div>
-
-<script>
-
-let products = JSON.parse(localStorage.getItem("products")) || [];
-
-let category="femme";
-
-function save(){
-
-localStorage.setItem("products",JSON.stringify(products));
-
-render();
-
-}
-
-function render(){
-
-let container=document.getElementById("products");
-
-container.innerHTML="";
-
-products.filter(p=>p.category==category).forEach((p,i)=>{
-
-let card=document.createElement("div");
-
-card.className="card";
-
-card.innerHTML=`
-
-<img src="${p.image}">
-
-<h4>${p.name}</h4>
-
-<p>${p.price} FCFA</p>
-
-<button onclick="order('${p.name}',${p.price})">Commander</button>
-
-<button onclick="removeProduct(${i})" style="background:red">Supprimer</button>
-
-`;
-
-container.appendChild(card);
-
-});
-
-}
-
-function showCategory(cat){
-
-category=cat;
-
-render();
-
-}
-
-function order(name,price){
-
-let phone="221770000000";
-
-let text=`Bonjour je veux commander ${name} - ${price} FCFA`;
-
-window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`);
-
-}
-
-function removeProduct(i){
-
-products.splice(i,1);
-
-save();
-
-}
-
-function openAdmin(){
-
-document.getElementById("adminPanel").style.display="block";
-
-}
-
-function login(){
-
-if(document.getElementById("password").value=="aidasecret"){
-
-document.getElementById("adminArea").style.display="block";
-
-}
-
-else{
-
-alert("Mot de passe incorrect");
-
-}
-
-}
-
-function addProduct(){
-
-let name=document.getElementById("name").value;
-
-let price=document.getElementById("price").value;
-
-let category=document.getElementById("category").value;
-
-let file=document.getElementById("image").files[0];
-
-let reader=new FileReader();
-
-reader.onload=function(e){
-
-products.push({
-
-name,
-
-price,
-
-category,
-
-image:e.target.result
-
-});
-
-save();
-
-};
-
-reader.readAsDataURL(file);
-
-}
-
-render();
-
-</script>
-
+  <header>
+    <h1>Aida Beauty</h1>
+    <p>Mode & Beauté moderne inspirée d'Afrique</p>
+  </header>
+
+  <nav>
+    <a href="#accueil">Accueil</a>
+    <a href="#femme">Femme</a>
+    <a href="#homme">Homme</a>
+    <a href="#beaute">Beauté</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <div class="wrap" id="accueil">
+    <div class="hero">
+      <h2>Découvrez notre sélection tendance</h2>
+      <p>Produits naturels, tenues modernes, style 100% vous</p>
+    </div>
+
+    <h3 class="sectionTitle" id="femme">Femme</h3>
+    <div class="grid" id="grid-femme"></div>
+
+    <h3 class="sectionTitle" id="homme">Homme</h3>
+    <div class="grid" id="grid-homme"></div>
+
+    <h3 class="sectionTitle" id="beaute">Beauté</h3>
+    <div class="grid" id="grid-beaute"></div>
+
+    <p class="note">Clique sur “Commander sur WhatsApp” pour commander.</p>
+
+    <h3 class="sectionTitle" id="contact">Contact</h3>
+    <p>Email : <strong>ndeyeaidag600@gmail.com</strong></p>
+    <p>WhatsApp : <strong id="waText">+221 77 000 00 00</strong></p>
+  </div>
+
+  <footer>© 2025 Aida Beauty - Tous droits réservés</footer>
+
+  <script>
+    // ✅ Mets ton vrai numéro WhatsApp ici (sans +)
+    const WHATSAPP_NUMBER = "221770000000";
+
+    function waLink(message){
+      return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    }
+
+    function cardHTML(p){
+      const msg = `Bonjour Aida Beauty, je veux commander : ${p.name} - ${p.price} FCFA (Catégorie: ${p.category}). Merci !`;
+      return `
+        <div class="card">
+          <img class="img" src="${p.image}" alt="${p.name}" onerror="this.style.display='none'">
+          <div class="p">
+            <p class="title">${p.name}</p>
+            <p class="price">${p.price} FCFA</p>
+            <p class="meta">${p.category}</p>
+            <a class="btn btn-wa" target="_blank" href="${waLink(msg)}">Commander sur WhatsApp</a>
+          </div>
+        </div>
+      `;
+    }
+
+    async function loadProducts(){
+      const res = await fetch("products.json", { cache: "no-store" });
+      const data = await res.json();
+
+      const byCat = { femme: [], homme: [], beaute: [] };
+      data.products.forEach(p => {
+        const c = (p.category || "").toLowerCase().trim();
+        if (byCat[c]) byCat[c].push(p);
+      });
+
+      document.getElementById("grid-femme").innerHTML  = byCat.femme.length  ? byCat.femme.map(cardHTML).join("")  : "<p>Aucun produit.</p>";
+      document.getElementById("grid-homme").innerHTML  = byCat.homme.length  ? byCat.homme.map(cardHTML).join("")  : "<p>Aucun produit.</p>";
+      document.getElementById("grid-beaute").innerHTML = byCat.beaute.length ? byCat.beaute.map(cardHTML).join("") : "<p>Aucun produit.</p>";
+    }
+
+    loadProducts().catch(()=>{
+      document.getElementById("grid-femme").innerHTML = "<p>Erreur: products.json introuvable.</p>";
+    });
+  </script>
 </body>
 </html>
